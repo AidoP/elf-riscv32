@@ -1,0 +1,10 @@
+[package]
+name = "elf-riscv32"
+description = "An ELF parser for elf32-littleriscv"
+repository = "https://github.com/AidoP/elf_riscv32/"
+version = "0.0.1"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+memchr = { version = "2.5.0", default-features = false }
