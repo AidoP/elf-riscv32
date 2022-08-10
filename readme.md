@@ -1,7 +1,7 @@
 # elf-riscv32
 [![Get from crates.io][cratesio-image]][crates.io]
 [![Documentation on docs.rs][docsrs-image]][docs.rs]
----
+
 [cratesio-image]: https://img.shields.io/crates/v/elf\_riscv32.svg
 [crates.io]: https://crates.io/crates/elf\_riscv32
 [docsrs-image]: https://docs.rs/elf\_riscv32/badge.svg
