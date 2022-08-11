@@ -158,11 +158,11 @@ pub enum Error {
     InvalidMagic,
     InvalidFormat,
     InvalidVersion,
-    UnsupportedFileType(u16),
-    UnsupportedMachine(u16),
-    UnsupportedProgramType(u32),
+    UnsupportedFileType(FileType),
+    UnsupportedMachine(Machine),
+    UnsupportedProgramType(ProgramType),
     UnsupportedProgramFlags(ProgramFlags),
-    UnsupportedSectionType(u32),
+    UnsupportedSectionType(SectionType),
     UnsupportedSectionFlags(SectionFlags),
     WrongProgramType { expected: ProgramType, actual: ProgramType },
     WrongProgramFlags { expected: ProgramFlags, actual: ProgramFlags },
@@ -581,12 +581,12 @@ c_enum!{
         Executable = 2,
         SharedObject = 3,
         Core = 4
-    } v => Err(Error::UnsupportedFileType(v))
+    } v => Err(Error::UnsupportedFileType(Self(v)))
 }
 c_enum!{
     pub Machine(u16) {
         RiscV = 243
-    } v => Err(Error::UnsupportedMachine(v))
+    } v => Err(Error::UnsupportedMachine(Self(v)))
 }
 c_enum!{
     pub ProgramType(u32) {
@@ -599,7 +599,7 @@ c_enum!{
         ThreadLocalStorage = 7,
         GnuStack = 0x6474E551,
         RiscVAttributes = 0x70000003
-    } v => Err(Error::UnsupportedProgramType(v))
+    } v => Err(Error::UnsupportedProgramType(Self(v)))
 }
 c_flags!{
     pub ProgramFlags(u32) {
@@ -626,7 +626,7 @@ c_enum!{
         PreinitArray = 16,
         Group = 17,
         SymbolIndex = 18
-    } v => Err(Error::UnsupportedSectionType(v))
+    } v => Err(Error::UnsupportedSectionType(Self(v)))
 }
 c_flags!{
     pub SectionFlags(u32) {
