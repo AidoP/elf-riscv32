@@ -160,6 +160,7 @@ pub enum Error {
     InvalidVersion,
     UnsupportedFileType(FileType),
     UnsupportedMachine(Machine),
+    WrongFileType { expected: FileType, actual: FileType },
     UnsupportedProgramType(ProgramType),
     UnsupportedProgramFlags(ProgramFlags),
     UnsupportedSectionType(SectionType),
@@ -228,6 +229,13 @@ impl<'a> Elf<'a> {
             header,
             section_names
         })
+    }
+    pub fn check_type(&self, ty: FileType) -> Result<()> {
+        if self.header.ty != ty {
+            Err(Error::WrongFileType { expected: ty, actual: self.header.ty })
+        } else {
+            Ok(())
+        }
     }
     pub fn program(&self, index: u16) -> Result<Program<'a>> {
         let header = self.header.program_header(self.data, index)?;
